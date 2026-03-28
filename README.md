@@ -1,107 +1,140 @@
-# 📊 End-to-End Financial Data Pipeline for Market Sentiment & Volatility Analysis
+# 📊 End-to-End Data Pipeline for Market Sentiment & Volatility Analysis
 
 ## ⚡ TL;DR
-- Built an end-to-end data pipeline integrating 600K+ multi-source time-series records  
-- Combined financial, sentiment, and external data into a unified analytical dataset  
-- Identified statistically significant relationships between public sentiment and market volatility  
-- Developed models to estimate volatility using sentiment-driven features  
-- Delivered insights through an interactive Flask dashboard  
-
----
-
-## 🚀 Overview
-
-Built an end-to-end data pipeline integrating multi-source time-series data (600K+ records) to analyze how public sentiment impacts market volatility.
-
-This project combines data engineering, statistical analysis, and modeling to uncover patterns that support data-driven decision-making in financial markets.
+- Built a scalable end-to-end data pipeline processing 600K+ multi-source time-series records
+- Automated data ingestion, transformation, and storage using AWS (Lambda, S3, RDS)
+- Integrated financial, sentiment, and external datasets into a unified analytical dataset
+- Enabled reliable and reproducible analytics workflows
+- Delivered insights through an interactive dashboard
 
 ---
 
 ## 🧠 Problem
 
-Financial data is often fragmented across multiple sources, making it difficult to identify relationships between market behavior and external signals like public sentiment.
+Financial and external data are often fragmented across multiple sources, making it difficult to build reliable, unified datasets for analysis.
 
-Traditional analysis focuses on price movements and overlooks behavioral factors that may influence volatility.
+Traditional workflows are often:
+- manual
+- difficult to scale
+- hard to reproduce
+
+This creates bottlenecks in both data accessibility and downstream analytics.
 
 ---
 
-## 🛠️ Approach
+## 🏗️ System Architecture
+
+The system was designed as a modular, cloud-based data pipeline with the following layers:
+
+- **Data Sources**: Financial market data, news sentiment, Google Trends, and weather APIs
+- **Ingestion Layer**: API-based collection of multi-source time-series data
+- **Processing Layer**: Python ETL workflows for cleaning, normalization, and feature engineering
+- **Storage Layer**: PostgreSQL on AWS RDS
+- **Orchestration Layer**: AWS Lambda for scheduled pipeline execution
+- **Serving Layer**: Interactive dashboard for analysis and visualization
+
+---
+
+## 🔄 Pipeline Flow
+
+1. **Data Ingestion**
+   - Collected data from multiple external APIs
+   - Automated periodic ingestion for continuous updates
+
+2. **Data Transformation**
+   - Cleaned and standardized time-series data from heterogeneous sources
+   - Engineered analytical features such as rolling averages, sector returns, sentiment indicators, and volatility measures
+
+3. **Data Storage**
+   - Designed a relational schema in PostgreSQL
+   - Stored processed datasets for efficient querying and downstream use
+
+4. **Workflow Automation**
+   - Scheduled ETL jobs using AWS Lambda
+   - Reduced manual intervention and improved reproducibility
+
+5. **Data Serving**
+   - Built an interactive dashboard for exploratory analysis and monitoring
+   - Enabled users to analyze trends, correlations, and volatility patterns
+
+---
+
+## 🛠️ Tech Stack
+
+### Languages & Libraries
+- Python
+- SQL
+- Pandas
+- NumPy
+
+### Cloud & Infrastructure
+- AWS Lambda
+- AWS S3
+- AWS RDS (PostgreSQL)
 
 ### Data Engineering
-- Built ETL pipelines to ingest, clean, and integrate multi-source datasets  
-- Processed 600K+ time-series records from financial, sentiment, and external data  
-- Designed PostgreSQL schema for structured storage  
-
-### Feature Engineering & Analysis
-- Engineered features including volatility metrics and sentiment indices  
-- Conducted statistical analysis with significance testing  
-- Performed time-series alignment and lag analysis  
-
-### Modeling
-- Built regression models to estimate market volatility  
-- Evaluated feature importance to identify key drivers  
+- ETL pipeline development
+- Multi-source data integration
+- Time-series data processing
+- Relational schema design
 
 ### Visualization
-- Developed interactive dashboard using Flask and Plotly  
-- Enabled real-time exploration of trends and correlations  
+- Streamlit / Flask
 
 ---
 
-## 📊 Key Results
+## 🎥 Demo
 
-- Identified significant relationships between sentiment and market volatility  
-- Found volatility metrics more strongly correlated than price levels  
-- Discovered industry-specific sensitivity to sentiment signals  
-- Demonstrated value of external data in financial analysis  
+This video demonstrates the end-to-end data pipeline workflow, including ingestion, processing, storage, and dashboard visualization.
+
+**Demo Video:** 
+This video demonstrates the end-to-end data pipeline, including data ingestion, processing, and visualization.
+
+Key highlights:
+- Automated data ingestion from multiple external APIs
+- ETL pipeline using AWS services
+- Data storage in PostgreSQL
+- Interactive dashboard for analysis and monitoring
+
+https://youtu.be/dxp3GlqZcoo
 
 ---
 
-## 💡 Impact
+## 💡 Engineering Focus
 
-- Shows how sentiment can act as a leading indicator of volatility  
-- Provides a framework for integrating external data into financial pipelines  
-- Bridges data engineering and data science for better decision-making  
+This project focuses on **data engineering and pipeline design** rather than purely predictive modeling.
+
+Key engineering areas demonstrated:
+- scalable data ingestion from multiple external sources
+- automated ETL workflow design
+- cloud-based storage and orchestration
+- structured data modeling for downstream analytics
+- reproducible and maintainable pipeline architecture
 
 ---
 
-## 🏗️ Architecture
-Raw Data → ETL → Feature Engineering → Modeling → Dashboard
+## 📈 Key Outcomes
 
-## 🧩 Key Components
+- Processed **600K+ multi-source time-series records**
+- Automated ingestion and transformation workflows across multiple APIs
+- Unified fragmented external datasets into a single analytical dataset
+- Improved data accessibility for downstream analysis and dashboard reporting
 
-- **ETL Pipeline**: `src/etl/merge_all_datasets.py`  
-  → Integrates multiple time-series datasets into a unified format  
+---
 
-- **Analysis Module**: `src/analysis/time_series_depression_stock_analysis.py`  
-  → Performs statistical analysis and correlation testing  
+## 🔮 Future Improvements
 
-- **Database Loader**: `src/etl/export_to_postgres.py`  
-  → Loads processed data into PostgreSQL  
+- Introduce workflow orchestration with **Apache Airflow**
+- Extend storage architecture to a **data lake format using S3 + Parquet**
+- Add **data quality validation and monitoring** with tools such as Great Expectations
+- Support **real-time or near-real-time ingestion** using streaming tools such as Kafka
 
-- **Web Dashboard**: `flask/app.py`  
-  → Serves interactive visualizations and analytics  
+---
 
-## 🌐 Demo : will update the video
+## 📌 Takeaway
 
-
-Run locally:
-
-cd flask  
-python app.py  
-
-Open: http://127.0.0.1:18502
-
-## ⚙️ Tech Stack
-
-- Python, SQL  
-- Pandas, NumPy, SciPy  
-- Flask  
-- PostgreSQL  
-- Plotly  
-
-## 📁 Structure
-
-├── flask/        # Dashboard  
-├── src/          # ETL + analysis  
-├── data/         # datasets  
-├── config/       # DB schema  
+This project demonstrates the ability to:
+- build end-to-end data pipelines in a cloud environment
+- integrate and process large-scale multi-source datasets
+- automate repeatable ETL workflows
+- support analytics through reliable, structured, and scalable data systems
