@@ -1,6 +1,5 @@
 
-
-# 📊 Time-Series-Driven-Recommendation-System-for-Market-Trends-Public-Sentiment-
+# 📊 Time-Series-Driven-Recommendation-System-for-Market-Trends-Public-Sentiment
 
 **Comprehensive Data Engineering & Analysis Platform**
 
@@ -28,8 +27,8 @@ This project integrates, cleans, and analyzes various time series data (depressi
 - **archive/**: Old scripts, experimental data, deprecated code/data
 
 ## 🔄 Data Flow & Pipeline
-1. **Raw Data Ingestion**: Collected in data/raw_data/ and similar folders
-2. **ETL & Integration**: Cleaned and merged in src/etl/ (e.g., merge_all_datasets.py)
+1. **Raw Data Ingestion**: Collected in data/raw_data/ and other data/ subdirectories (e.g., data/interim/, data/external/)
+1. **Raw Data Ingestion**: Collected in data/raw_data/ (the raw data subdirectory under data/)
 3. **Database Loading**: Use SQL schema in config/ and export_to_postgres.py
 4. **Analysis/Visualization**: Performed in src/analysis/, src/visualization/
 5. **Web Dashboard**: Results visualized and served via flask/
@@ -43,6 +42,9 @@ cd flask
 python app.py
 # → Open http://127.0.0.1:18502 in your browser
 ```
+
+> **Note:**
+> The web dashboard runs locally. The address `http://127.0.0.1:18502` is only accessible from your own computer after running the server. To access from another device, you must deploy the app to a public server or set up port forwarding.
 ### 2. Run Data Integration/Analysis Pipeline
 ```bash
 python src/etl/merge_all_datasets.py
@@ -62,9 +64,9 @@ python src/etl/export_to_postgres.py
 - **Research Background**: [docs/WHY_CORRELATIONS_MATTER.md](docs/WHY_CORRELATIONS_MATTER.md)
 
 ## 📝 Notes & Miscellaneous
-- **Team Analysis/Collaboration**: See archive/ or cooperation/ folder
-- **Redundant/unused data or code will be moved to archive/**
-- **For detailed analysis results, ETL flow, DB design, see each document in docs/**
+- **Team Analysis/Collaboration**: See archive/cooperation/ folder
+- **Team Analysis/Collaboration**: See docs/ (current) and archive/ (legacy) folders
+- **Redundant/unused data or code should be moved to archive/**
 
 ---
 
