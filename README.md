@@ -1,139 +1,70 @@
+
+
 # 📊 Time-Series-Driven-Recommendation-System-for-Market-Trends-Public-Sentiment-
 
-> **Comprehensive Time Series Analysis Platform**  
-> Depression sentiment indicators vs. stock market performance (2017-2024)
+**Comprehensive Data Engineering & Analysis Platform**
 
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
-[![Flask](https://img.shields.io/badge/Flask-3.0%2B-green)](https://flask.palletsprojects.com/)
-[![Data Period](https://img.shields.io/badge/Data%20Period-2017--2024-orange)](.)
-[![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)](.)
+This project integrates, cleans, and analyzes various time series data (depression indicators, news, stock prices, environmental data, etc.), providing both a Flask-based dashboard and research results.
 
-## 🎯 Project Overview
-
-This data engineering project analyzes the relationship between depression sentiment indicators (derived from news articles and Google Trends) and stock market performance. The project combines multiple data sources to create a comprehensive analysis platform with both static research findings and an interactive Flask web dashboard.
-
-### Key Research Questions
-1. **Do stock prices (OHLCV) correlate with depression sentiment?**
-2. **How does the S&P 500 relate to depression indicators?**
-3. **Does environmental data (rainfall, temperature) affect market/sentiment relationships?**
-4. **What industry-specific patterns exist in sentiment correlation?**
-
----
-
-## 🏗️ Actual Project Structure
+## 🗺️ Project Structure & Folder Overview
 
 ```
-Fundamentals-of-Data-Engineering_bk/
-├── 📁 flask/                       # Web Application
-│   ├── app.py                     # Main Flask server (1,770+ lines)
-│   ├── templates/                 # HTML templates (11 pages)
-│   ├── static/                    # CSS, JS, images
-│   └── start_server.sh           # Deployment script
-│
-├── 📁 cooperation/                 # Team Collaboration
-│   ├── analysis_wenda.ipynb      # Wenda's analysis
-│   └── analysis_ZIYI.ipynb       # ZIYI's group project analysis
-│
-├── 📁 submission/                  # Professional Submission Package
-│   ├── flask_app/                # Complete Flask application
-│   ├── database_schema/          # Database setup files
-│   ├── data_sample/              # Sample datasets
-│   └── README.md files           # Comprehensive documentation
-│
-├── 📁 MongoDB_to_Postgre_PY/      # Database Migration Tools
-│   ├── Extract_MongoDB.py        # MongoDB extraction
-│   ├── Export_to_CSV.py          # Data export utilities
-│   ├── Statistical_Analysis_All_Datasets.py  # Statistical analysis
-│   └── data_quality_reports/     # Quality analysis
-│
-├── 📁 raw_data/                   # Original Source Data
-│   ├── ccnews_depression.csv     # News sentiment data
-│   ├── sp500.csv                 # S&P 500 market data
-│   ├── rainfall.csv              # Weather data
-│   ├── depression_index.csv      # Depression indicators
-│   ├── company_info.csv          # Stock company data
-│   └── stock_data.csv            # Stock price data
-│
-├── 📁 csv_exports/                # Processed Data Exports
-│   ├── depression_stock_merged_clean.csv  # Cleaned merged data
-│   ├── merged_analysis_data.csv          # Final analysis data
-│   ├── stock_daily_aggregated_clean.csv  # Processed stocks
-│   └── ccnews_depression_daily_count_final.csv  # Daily counts
-│
-├── 📁 cleaned_data/               # Intermediate cleaned data
-├── 📁 final_data/                 # Analysis-ready datasets
-├── 📁 analysis/                   # Analysis outputs
-├── 📁 analysis_results/           # Generated results
-│   ├── data/                     # Analysis data files
-│   └── figures/                  # Generated visualizations
-│
-├── 📁 Assignment/                 # Course assignments
-│   └── *.ipynb files             # Jupyter notebooks
-│
-├── 📊 Data Processing Scripts (Root Level)
-├── Extract_MongoDB.py            # Main data extraction
-├── clean_raw_data.py            # Data cleaning pipeline
-├── create_cleaned_datasets.py    # Dataset preparation
-├── create_final_integrated_dataset.py  # Final integration
-├── merge_all_datasets.py        # Data merging
-├── export_to_postgres.py        # PostgreSQL export
-├── integrated_timeseries_analysis.py  # Time series analysis
-├── statistical_significance_analysis.py  # Statistical validation
-├── time_series_depression_stock_analysis.py  # Main analysis
-├── create_importance_ranking.py  # Feature ranking
-├── create_executive_summary.py   # Summary generation
-├── wiki_ticker_info.py          # Ticker utilities
-│
-├── 📄 Main Dataset
-├── merged_time_series_data.csv   # Primary analysis dataset
-├── movies.json                   # Additional data
-│
-├── 🗃️ Database Configuration
-├── create_timeseries_postgres_schema.sql  # Database schema
-├── create_normalized_schema.sql           # Normalized schema
-├── load_data_to_postgres.sql             # Data loading
-├── postgres_query_examples.sql           # Example queries
-│
-├── 📚 Documentation
-├── INDEX.md                      # Project index
-├── QUICK_REFERENCE.md           # Quick findings
-├── TIME_SERIES_ANALYSIS_README.md  # Technical documentation
-├── STATISTICAL_ANALYSIS_README.md  # Statistical methodology
-├── DATA_INTEGRATION_SUMMARY.md    # Integration overview
-├── WHY_CORRELATIONS_MATTER.md     # Research context
-├── PROJECT_SUBMISSION_GUIDE.md    # Complete submission guide
-├── requirements_analysis.txt      # Requirements analysis
-├── STATISTICAL_INTERPRETATION_GUIDE.txt  # Statistical guide
-└── README.md                     # This file
-│
-├── 📁 flask/                       # Web application
-│   ├── app.py                     # Main Flask server
-│   ├── templates/                 # HTML templates
-│   ├── static/                    # CSS, JS, images
-│   └── start_server.sh           # Deployment script
-│
-├── 📁 reports/                     # Analysis outputs
-│   └── analysis/                  # Generated visualizations
-│
-├── 📁 docs/                        # Documentation
-│   ├── INDEX.md                   # Project index
-│   ├── QUICK_REFERENCE.md         # Quick findings
-│   ├── TIME_SERIES_ANALYSIS_README.md  # Technical docs
-│   └── *.md files                 # Other documentation
-│
-├── 📁 config/                      # Configuration files
-│   ├── create_normalized_schema.sql    # Database schema
-│   └── postgres_query_examples.sql     # Sample queries
-│
-├── 📁 archive/                     # Archived/old files
-│   ├── old_scripts/               # Deprecated scripts
-│   └── old_data/                  # Historical data
-│
-├── 🚀 run_etl.sh                   # ETL pipeline runner
-├── 🚀 run_analysis.sh              # Analysis pipeline runner
-├── 📋 QUICKSTART.md                # Quick start guide
-└── 📋 requirements.txt             # Python dependencies
+├── flask/                # Web dashboard (Flask app, templates, static files)
+├── src/                  # ETL, analysis, and visualization pipeline code
+├── data/                 # Raw, intermediate, and final datasets
+├── config/               # DB schema, query examples, and configuration files
+├── docs/                 # Analysis, ETL, statistics, and summary documents
+├── archive/              # Old/experimental/unused scripts and data
+├── requirements.txt      # Python dependencies
+└── README.md             # (This file) Project structure and usage guide
 ```
+
+### Folder Roles
+- **flask/**: Web dashboard, visualization, user interface
+- **src/**: Data ingestion, cleaning, integration, analysis, and visualization pipeline code
+- **data/**: Raw, cleaned, and final (merged) datasets
+- **config/**: DB schema (SQL), query examples, data loading scripts
+- **docs/**: Detailed documents for analysis results, ETL flow, statistical interpretation, etc.
+- **archive/**: Old scripts, experimental data, deprecated code/data
+
+## 🔄 Data Flow & Pipeline
+1. **Raw Data Ingestion**: Collected in data/raw_data/ and similar folders
+2. **ETL & Integration**: Cleaned and merged in src/etl/ (e.g., merge_all_datasets.py)
+3. **Database Loading**: Use SQL schema in config/ and export_to_postgres.py
+4. **Analysis/Visualization**: Performed in src/analysis/, src/visualization/
+5. **Web Dashboard**: Results visualized and served via flask/
+
+## 🚀 How to Run
+### 1. Launch the Web Dashboard
+```bash
+cd flask
+./start_server.sh
+# or
+python app.py
+# → Open http://127.0.0.1:18502 in your browser
+```
+### 2. Run Data Integration/Analysis Pipeline
+```bash
+python src/etl/merge_all_datasets.py
+python src/analysis/time_series_depression_stock_analysis.py
+```
+### 3. Create DB Schema & Load Data
+```bash
+psql -d time_series_analysis -f config/create_timeseries_postgres_schema.sql
+python src/etl/export_to_postgres.py
+```
+
+## 📚 Key Documents & References
+- **Analysis Summary**: [docs/QUICK_REFERENCE.md](docs/QUICK_REFERENCE.md)
+- **ETL/DB Design**: [docs/DATA_INTEGRATION_SUMMARY.md](docs/DATA_INTEGRATION_SUMMARY.md)
+- **Full Analysis Flow**: [docs/INDEX.md](docs/INDEX.md)
+- **Statistics/Interpretation**: [docs/TIME_SERIES_ANALYSIS_README.md](docs/TIME_SERIES_ANALYSIS_README.md), [docs/STATISTICAL_ANALYSIS_README.md](docs/STATISTICAL_ANALYSIS_README.md)
+- **Research Background**: [docs/WHY_CORRELATIONS_MATTER.md](docs/WHY_CORRELATIONS_MATTER.md)
+
+## 📝 Notes & Miscellaneous
+- **Team Analysis/Collaboration**: See archive/ or cooperation/ folder
+- **Redundant/unused data or code will be moved to archive/**
+- **For detailed analysis results, ETL flow, DB design, see each document in docs/**
 
 ---
 
