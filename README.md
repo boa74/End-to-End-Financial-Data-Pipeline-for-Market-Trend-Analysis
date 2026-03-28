@@ -67,11 +67,6 @@ The system was designed as a modular, cloud-based data pipeline with the followi
 - Pandas
 - NumPy
 
-### Cloud & Infrastructure
-- AWS Lambda
-- AWS S3
-- AWS RDS (PostgreSQL)
-
 ### Data Engineering
 - ETL pipeline development
 - Multi-source data integration
@@ -138,3 +133,25 @@ This project demonstrates the ability to:
 - integrate and process large-scale multi-source datasets
 - automate repeatable ETL workflows
 - support analytics through reliable, structured, and scalable data systems
+
+---
+
+## 📁 Project Folder & File Structure
+
+- **src/**
+  - **analysis/** : Core analysis scripts (e.g., `statistical_significance_analysis.py` – statistical correlation analysis)
+  - **etl/** : Data preprocessing and merging (e.g., `clean_raw_data.py` – raw data cleaning)
+  - **visualization/** : Visualization and dashboard generation (e.g., `create_executive_summary.py` – main results dashboard)
+  - **utils/** : Utility functions and helpers
+- **data/**
+  - **exports/** : Processed/analysis result datasets
+  - **final/** : Final integrated datasets
+- **config/**
+  - `financial_data_analysis_queries.sql` : Main SQL queries for analysis
+- **docs/**
+  - `QUICK_REFERENCE.md` : Quick reference documentation
+  - `STATISTICAL_ANALYSIS_README.md` : Statistical analysis explanations
+- **flask/**
+  - `app.py` : Web dashboard server
+
+> Each folder and file is named to reflect its main purpose, making it easy to understand the project structure at a glance.

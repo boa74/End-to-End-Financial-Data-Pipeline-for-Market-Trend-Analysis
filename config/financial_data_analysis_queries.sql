@@ -1,9 +1,5 @@
--- ============================================================================
--- PostgreSQL Query Examples for Time Series Analysis
--- ============================================================================
--- Useful queries for analyzing depression-stock correlation data
--- Copy and paste these into psql or your PostgreSQL client
--- ============================================================================
+-- This file was renamed from postgres_query.sql to financial_data_analysis_queries.sql
+-- All references in the codebase should now use this new filename.
 
 -- ============================================================================
 -- 1. BASIC DATA EXPLORATION
