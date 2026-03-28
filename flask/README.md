@@ -1,6 +1,6 @@
 # Depression Index & Stock Market Analysis Dashboard
 
-🎓 **Columbia University Style** - Professional Flask Web Application
+ Professional Flask Web Application
 
 ## 📊 Overview
 
@@ -33,20 +33,6 @@ flask/
 └── static/
     └── images/               # Analysis visualizations (11 PNG files)
 ```
-
-## 🎨 Design Features
-
-### Color Scheme (Columbia University)
-- **Primary Blue**: #75A8C8, #B9D9EB
-- **Dark Blue**: #1E3A5F
-- **Accent**: #E8F4F8
-- Modern gradient backgrounds
-- Smooth hover effects and animations
-
-### Typography
-- **Font**: Inter (Google Fonts)
-- Clean, professional appearance
-- Excellent readability
 
 ## 📱 Pages & Features
 
@@ -219,9 +205,8 @@ lsof -ti:18502 | xargs kill -9
 3. Add `<img>` tag in relevant template
 4. Restart server
 
-## 🎓 Academic Context
+## Data Description
 
-**Project**: Time Series Analysis of Depression Index and Stock Market Performance  
 **Period**: 2017-2024 (551 daily observations)  
 **Data Sources**: 
 - News articles (depression word count)
@@ -235,11 +220,6 @@ lsof -ti:18502 | xargs kill -9
 - 551 time points
 - Multiple correlation methods (Pearson)
 
-## 📄 License
-
-Academic research project for educational purposes.
-
----
 
 **Last Updated**: November 22, 2025  
 **Server**: http://127.0.0.1:18502  
