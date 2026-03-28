@@ -154,4 +154,4 @@ This project demonstrates the ability to:
 - **flask/**
   - `app.py` : Web dashboard server
 
-> Each folder and file is named to reflect its main purpose, making it easy to understand the project structure at a glance.
+> Each folder and file is named to reflect its main purpose, making it easy to understand the project structure at a glance. Will be updated and reorganized soon.
