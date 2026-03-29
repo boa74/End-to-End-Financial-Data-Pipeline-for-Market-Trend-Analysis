@@ -1,157 +1,170 @@
-# 📊 End-to-End Data Pipeline for Market Sentiment & Volatility Analysis
+# 📊 Time Series Analysis: Depression Index & Market Volatility
+
+> **Behavioral Signals & Financial Markets (2017–2024)**  
+> Investigating how human emotional states relate to market volatility across industries
+
+---
 
 ## ⚡ TL;DR
-- Built a scalable end-to-end data pipeline processing 600K+ multi-source time-series records
-- Automated data ingestion, transformation, and storage using AWS (Lambda, S3, RDS)
-- Integrated financial, sentiment, and external datasets into a unified analytical dataset
-- Enabled reliable and reproducible analytics workflows
-- Delivered insights through an interactive dashboard
+- Analyzed **600K+ multi-source time-series records**
+- Found **statistically significant correlations (p < 0.001)** between depression index and market volatility  
+- Identified **lag effects (1–3 days)** where sentiment precedes volatility  
+- Observed **industry-level variation** in sensitivity to behavioral signals  
+- Built an interactive Flask dashboard for exploration  
 
 ---
 
 ## 🧠 Problem
 
-Financial and external data are often fragmented across multiple sources, making it difficult to build reliable, unified datasets for analysis.
+Traditional financial models rely heavily on price-based indicators.
 
-Traditional workflows are often:
-- manual
-- difficult to scale
-- hard to reproduce
+However, behavioral finance suggests that **human emotion and sentiment** may influence market dynamics.
 
-This creates bottlenecks in both data accessibility and downstream analytics.
+This project investigates:
 
----
-
-## 🏗️ System Architecture
-
-The system was designed as a modular, cloud-based data pipeline with the following layers:
-
-- **Data Sources**: Financial market data, news sentiment, Google Trends, and weather APIs
-- **Ingestion Layer**: API-based collection of multi-source time-series data
-- **Processing Layer**: Python ETL workflows for cleaning, normalization, and feature engineering
-- **Storage Layer**: PostgreSQL on AWS RDS
-- **Orchestration Layer**: AWS Lambda for scheduled pipeline execution
-- **Serving Layer**: Interactive dashboard for analysis and visualization
+> **Does a depression index (derived from public signals) influence market volatility?**  
+> **Do these effects vary across industries?**
 
 ---
 
-## 🔄 Pipeline Flow
+## 📦 Data
 
-1. **Data Ingestion**
-   - Collected data from multiple external APIs
-   - Automated periodic ingestion for continuous updates
+- Depression index (news + Google Trends)  
+- S&P 500 market data  
+- 498 stocks across 12 industries  
+- External signals (weather, trends)  
 
-2. **Data Transformation**
-   - Cleaned and standardized time-series data from heterogeneous sources
-   - Engineered analytical features such as rolling averages, sector returns, sentiment indicators, and volatility measures
+👉 Final dataset:
+- **551 daily observations (2017–2024)**  
+- **17+ engineered time-series features**
 
-3. **Data Storage**
-   - Designed a relational schema in PostgreSQL
-   - Stored processed datasets for efficient querying and downstream use
+---
 
-4. **Workflow Automation**
-   - Scheduled ETL jobs using AWS Lambda
-   - Reduced manual intervention and improved reproducibility
+## 🧪 Time Series Analysis
 
-5. **Data Serving**
-   - Built an interactive dashboard for exploratory analysis and monitoring
-   - Enabled users to analyze trends, correlations, and volatility patterns
+### Feature Engineering
+- Lag features (t-1, t-2, t-3)  
+- Rolling statistics (volatility, mean)  
+- Sentiment momentum indicators  
+
+---
+
+### Statistical Results
+
+| Metric | Correlation | Significance |
+|--------|------------|-------------|
+| Market Volatility | **0.275** | **p < 0.001** |
+| S&P 500 Volatility | **0.267** | **p < 0.001** |
+| Trading Volume | 0.211 | p < 0.001 |
+| Price Level | 0.144 | p < 0.001 |
+| Weather Impact | ~0.04 | Not significant |
+
+👉 **Key Insight:**  
+Depression signals correlate more strongly with **market volatility (uncertainty)** than price levels.
+
+---
+
+### Lag Effect Analysis
+
+- Strongest relationships observed at **1–3 day lag**
+- Suggests sentiment signals may **precede volatility changes**
+
+---
+
+### Industry-Level Analysis
+
+Observed variation in correlation strength across industries, suggesting differing sensitivity to behavioral signals.
+
+**More Sensitive Industries**
+- Leisure products  
+- Publishing  
+- Restaurants / consumer-facing sectors  
+
+**Less Sensitive or Negative Response**
+- Copper  
+- Cargo ground transportation  
+- Homebuilding / infrastructure-heavy sectors  
+
+👉 Interpretation: consumer-facing and discretionary sectors appear more sensitive to emotional signals than capital-intensive or infrastructure-heavy sectors.
+
+---
+
+## 📈 Key Insights
+
+- Emotional signals show **statistically significant relationships with volatility**  
+- Market behavior reflects **uncertainty more than direction**  
+- Behavioral effects vary across industries  
+- Consumer-facing sectors appear more sensitive than infrastructure-heavy sectors  
+- Weather variables were not significant in the current setup, likely due to geographic mismatch between localized weather data and broader market signals  
+
+---
+
+## 📊 Interactive Dashboard
+
+A Flask-based dashboard enables exploration of results:
+
+- Time-series visualization  
+- Industry comparison  
+- Lag-based volatility analysis  
+- Statistical summaries  
+
+🎥 Demo: https://youtu.be/dxp3GlqZcoo  
 
 ---
 
 ## 🛠️ Tech Stack
 
-### Languages & Libraries
-- Python
-- SQL
-- Pandas
-- NumPy
-
-### Data Engineering
-- ETL pipeline development
-- Multi-source data integration
-- Time-series data processing
-- Relational schema design
-
-### Visualization
-- Streamlit / Flask
+- Python (pandas, NumPy, SciPy)  
+- Flask  
+- Plotly  
+- PostgreSQL  
 
 ---
 
-## 🎥 Demo
+## 📁 Project Structure
 
-This video demonstrates the end-to-end data pipeline workflow, including ingestion, processing, storage, and dashboard visualization.
+```bash
+.
+├── src/                  # Data processing & analysis
+├── flask/                # Interactive dashboard
+├── data/                 # Processed datasets
+├── reports/              # Analysis outputs
+├── config/               # SQL schemas & queries
+├── docs/                 # Documentation
+└── README.md
+```
 
-**Demo Video:** 
-This video demonstrates the end-to-end data pipeline, including data ingestion, processing, and visualization.
-
-Key highlights:
-- Automated data ingestion from multiple external APIs
-- ETL pipeline using AWS services
-- Data storage in PostgreSQL
-- Interactive dashboard for analysis and monitoring
-
-https://youtu.be/dxp3GlqZcoo
-
----
-
-## 💡 Engineering Focus
-
-This project focuses on **data engineering and pipeline design** rather than purely predictive modeling.
-
-Key engineering areas demonstrated:
-- scalable data ingestion from multiple external sources
-- automated ETL workflow design
-- cloud-based storage and orchestration
-- structured data modeling for downstream analytics
-- reproducible and maintainable pipeline architecture
+👉 Organized to separate data processing, analysis, and visualization for clarity and scalability.
 
 ---
 
-## 📈 Key Outcomes
+## 🔧 Data Pipeline (Supporting)
 
-- Processed **600K+ multi-source time-series records**
-- Automated ingestion and transformation workflows across multiple APIs
-- Unified fragmented external datasets into a single analytical dataset
-- Improved data accessibility for downstream analysis and dashboard reporting
+- Multi-source ingestion  
+- Data cleaning & normalization  
+- Feature engineering  
+- PostgreSQL storage  
+
+👉 Focus: **analysis over infrastructure**
 
 ---
 
-## 🔮 Future Improvements
+## 🔮 Future Work
 
-- Introduce workflow orchestration with **Apache Airflow**
-- Extend storage architecture to a **data lake format using S3 + Parquet**
-- Add **data quality validation and monitoring** with tools such as Great Expectations
-- Support **real-time or near-real-time ingestion** using streaming tools such as Kafka
+- Extend predictive modeling (XGBoost, ARIMA) for volatility forecasting  
+- Incorporate real-time sentiment data pipelines  
+- Apply causal inference techniques (e.g., Granger causality)  
+- Conduct formal statistical testing across industries (e.g., ANOVA, regression with interaction terms) to validate whether observed differences are statistically significant  
+- Incorporate region-specific trading data alongside localized weather signals to evaluate potential environmental effects on market behavior  
 
 ---
 
 ## 📌 Takeaway
 
-This project demonstrates the ability to:
-- build end-to-end data pipelines in a cloud environment
-- integrate and process large-scale multi-source datasets
-- automate repeatable ETL workflows
-- support analytics through reliable, structured, and scalable data systems
+This project demonstrates:
 
----
-
-## 📁 Project Folder & File Structure
-
-- **src/**
-  - **analysis/** : Core analysis scripts (e.g., `statistical_significance_analysis.py` – statistical correlation analysis)
-  - **etl/** : Data preprocessing and merging (e.g., `clean_raw_data.py` – raw data cleaning)
-  - **visualization/** : Visualization and dashboard generation (e.g., `create_executive_summary.py` – main results dashboard)
-  - **utils/** : Utility functions and helpers
-- **data/**
-  - **exports/** : Processed/analysis result datasets
-  - **final/** : Final integrated datasets
-- **config/**
-  - `financial_data_analysis_queries.sql` : Main SQL queries for analysis
-- **docs/**
-  - `QUICK_REFERENCE.md` : Quick reference documentation
-  - `STATISTICAL_ANALYSIS_README.md` : Statistical analysis explanations
-- **flask/**
-  - `app.py` : Web dashboard server
-
-> Each folder and file is named to reflect its main purpose, making it easy to understand the project structure at a glance. Will be updated and reorganized soon.
+- Time-series analysis with real-world data  
+- Statistical validation (correlation, p-values)  
+- Behavioral finance insights  
+- End-to-end analytical workflow  
+- Interactive data storytelling  
