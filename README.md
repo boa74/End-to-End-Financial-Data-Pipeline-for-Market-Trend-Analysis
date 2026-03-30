@@ -265,3 +265,14 @@ This project demonstrates:
 - Behavioral finance insights  
 - End-to-end analytical workflow  
 - Interactive data storytelling  
+
+---
+
+## 📬 Contact
+
+**Boa Kim**  
+M.S. Applied Analytics, Columbia University  
+
+- GitHub: https://github.com/boa74 
+- LinkedIn: https://linkedin.com/in/boah-kim  
+ 
