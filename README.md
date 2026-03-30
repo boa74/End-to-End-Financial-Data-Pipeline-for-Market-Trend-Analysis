@@ -6,7 +6,7 @@
 
 ## 📊 Executive Overview
 
-![Executive Summary](./images/EXECUTIVE_SUMMARY_DASHBOARD.png)
+![Executive Summary](./images/analysis/EXECUTIVE_SUMMARY_DASHBOARD.png)
 
 This dashboard summarizes:
 - Market trends vs depression index  
@@ -29,7 +29,7 @@ This dashboard summarizes:
 
 ## 🧪 Time Series Analysis
 
-![Time Series](./images/analysis_1_time_series.png)
+![Time Series](./images/analysis/analysis_1_time_series.png)
 
 Temporal patterns suggest sentiment changes **precede volatility**
 
@@ -37,7 +37,7 @@ Temporal patterns suggest sentiment changes **precede volatility**
 
 ## 📊 Statistical Results
 
-![Volatility vs Depression](./images/analysis_2_sp500_depression.png)
+![Volatility vs Depression](./images/analysis/analysis_2_sp500_depression.png)
 
 - Volatility correlation: **0.275 (p < 0.001)**  
 - Price correlation: weaker  
@@ -48,7 +48,7 @@ Temporal patterns suggest sentiment changes **precede volatility**
 
 ## 🔬 Statistical Validation
 
-![Statistical Table](./images/CORRELATION_COMPARISON_TABLE.png)
+![Statistical Table](./images/analysis/CORRELATION_COMPARISON_TABLE.png)
 
 - p-value filtering  
 - Bonferroni correction  
@@ -59,7 +59,7 @@ Temporal patterns suggest sentiment changes **precede volatility**
 
 ## 🏭 Industry-Level Analysis
 
-![Industry Patterns](./images/analysis_4_industry_patterns.png)
+![Industry Patterns](./images/analysis/analysis_4_industry_patterns.png)
 
 - Consumer sectors → more sensitive  
 - Infrastructure → less sensitive  
