@@ -89,41 +89,100 @@ Observed variation in correlation strength across industries, suggesting differi
 
 ---
 
+## 📊 Statistical Validation
+
+To ensure that observed relationships are not driven by noise alone, we conducted multiple validation steps.
+
+---
+
+### 1. Correlation Validation
+
+| Metric | Correlation | Significance |
+|--------|------------|-------------|
+| Market Volatility | **0.275** | **p < 0.001** |
+| S&P 500 Volatility | **0.267** | **p < 0.001** |
+| Trading Volume | 0.211 | p < 0.001 |
+| Price Level | 0.144 | p < 0.001 |
+| Weather Impact | ~0.04 | Not significant |
+
+👉 **Interpretation:**  
+The depression index shows stronger relationships with **volatility (uncertainty)** than price levels, indicating alignment with market instability rather than direction.
+
+---
+
+### 2. Lag Effect Validation
+
+- Evaluated lag windows from **t+1 to t+3 days**
+- Strongest relationships observed at **1–3 day lag**
+
+👉 **Interpretation:**  
+Behavioral signals may act as **leading indicators**, preceding volatility rather than reacting to it.
+
+---
+
+### 3. Industry-Level Validation
+
+- Compared correlation strength across industries
+
+👉 **Findings:**
+- Higher sensitivity: consumer-facing sectors  
+- Lower sensitivity: infrastructure-heavy sectors  
+
+👉 **Interpretation:**  
+Market response to behavioral signals is **heterogeneous across industries**.
+
+---
+
+### 4. Robustness Check
+
+Compared multiple external signals:
+
+- Depression index  
+- News-derived signals  
+- Weather data  
+
+👉 **Result:**
+- Only the **depression index showed consistent statistical significance**
+- Other variables were weak or unstable
+
+👉 **Conclusion:**  
+The depression index is the **most reliable behavioral signal** in this analysis.
+
+---
+
 ## ⚠️ Limitations & Data Considerations
 
 This analysis includes several important limitations:
 
 ### 📰 News Text Data (cc_news dataset)
-- Only **headers and the first line** of articles were used to extract language signals  
-- Due to **computational constraints**, full-text processing and validation were not feasible  
-- As a result, extracted sentiment may **not fully represent complete article content**  
+- Only **headers and the first line** of articles were used  
+- Full-text processing was not feasible due to computational constraints  
+- Extracted sentiment may not fully represent article content  
 
 ---
 
 ### ⏱️ Timing Mismatch (News vs Market Reaction)
-- It is difficult to assume that **same-day news directly impacts same-day trading behavior**  
-- Market reactions may occur with **delays** or be influenced by additional external factors  
+- Same-day news may not directly impact same-day trading  
+- Market reactions may occur with delays or external influences  
 
 ---
 
 ### 🌦️ Weather Data Limitations
-- Weather data was **not aligned with specific trading locations**  
-- Stock market activity is **global**, while weather data is **regional**  
-- This mismatch likely explains the **lack of statistical significance**  
+- Weather data was not aligned with trading locations  
+- Markets are global, weather is regional  
+- Likely reason for lack of statistical significance  
 
 ---
 
 ### 📊 Interpretation Scope
-- Multiple signals were tested, but only the **depression index consistently showed statistical significance**  
-- Results should be interpreted as **associative relationships, not causal effects**  
+- Results should be interpreted as **associative, not causal**  
+- External signals interact with many unobserved variables  
 
 ---
 
 ### 👉 Conclusion from Limitations
 
-Despite noise and limitations in external variables, the **depression index demonstrates robust and consistent relationships with market volatility**, supporting its relevance as a meaningful behavioral signal.
-
-
+Despite noise in external variables, the **depression index demonstrates robust and consistent relationships with market volatility**, supporting its relevance as a behavioral signal.
 
 ---
 
@@ -132,8 +191,8 @@ Despite noise and limitations in external variables, the **depression index demo
 - Emotional signals show **statistically significant relationships with volatility**  
 - Market behavior reflects **uncertainty more than direction**  
 - Behavioral effects vary across industries  
-- Consumer-facing sectors appear more sensitive than infrastructure-heavy sectors  
-- Weather variables were not significant in the current setup, likely due to geographic mismatch between localized weather data and broader market signals  
+- Consumer-facing sectors are more sensitive than infrastructure-heavy sectors  
+- Weather variables were not significant under current assumptions  
 
 ---
 
@@ -163,16 +222,16 @@ A Flask-based dashboard enables exploration of results:
 
 ```bash
 .
-├── src/                  # Data processing & analysis
-├── flask/                # Interactive dashboard
-├── data/                 # Processed datasets
-├── reports/              # Analysis outputs
-├── config/               # SQL schemas & queries
-├── docs/                 # Documentation
+├── src/
+├── flask/
+├── data/
+├── images/
+├── config/
+├── docs/
 └── README.md
 ```
 
-👉 Organized to separate data processing, analysis, and visualization for clarity and scalability.
+👉 Structured for separation of data processing, analysis, and visualization.
 
 ---
 
