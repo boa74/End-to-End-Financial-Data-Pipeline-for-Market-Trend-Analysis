@@ -10,9 +10,9 @@ client = MongoClient('localhost',27017)
 db = client.tutorial
 
 # PostgreSQL connection
-PG_USER = 'postgres'  
-PG_PASSWORD = '123'  
-DB_NAME = 'tutorial_db'
+PG_USER = 'PG_USER'  
+PG_PASSWORD = 'PG_PASSWORD'  
+DB_NAME = 'DB_NAME'
 
 # First, create the database if it doesn't exist
 try:
