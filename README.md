@@ -1,6 +1,14 @@
 # 📊 Time Series Analysis: Depression Index & Market Volatility
 
-> Exploring whether depression-related behavioral and environmental signals contain useful information about stock market volatility — and where, when, and under what conditions those relationships matter.
+> Exploring whether depression-related behavioral signals contain useful information about stock market volatility.
+
+## 🔑 Main Finding
+
+**Depression-related search activity showed a modest but statistically significant relationship with market volatility (`r ≈ 0.27`), with stronger patterns appearing around a 1–3 day lag and varying across industries.**
+
+The relationship was stronger for **volatility than for stock price levels**, suggesting that behavioral signals may be more useful for understanding **market uncertainty and risk** than market direction.
+
+While the results do not establish predictive power, they suggest that behavioral data could be explored as a **supplementary signal for volatility forecasting and market-risk monitoring** alongside traditional financial indicators.
 
 ![Project Summary](images/project_summary.png)
 
@@ -333,8 +341,6 @@ The dashboard includes:
 - Industry comparisons
 - Lag analysis
 - Statistical summaries
-
-🎥 **Demo:** [Watch the dashboard demo](https://youtu.be/dxp3GlqZcoo)
 
 ---
 
