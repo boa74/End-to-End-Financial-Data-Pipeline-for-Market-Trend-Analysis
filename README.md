@@ -1,438 +1,134 @@
-# 📊 Time Series Analysis: Depression Index & Market Volatility
+# 📊 Behavioral Signals & Market Volatility
 
-> Exploring whether depression-related behavioral signals contain useful information about stock market volatility.
-
-## 🔑 Main Finding
-
-**Depression-related search activity showed a modest but statistically significant relationship with market volatility (`r ≈ 0.27`), with stronger patterns appearing around a 1–3 day lag and varying across industries.**
-
-The relationship was stronger for **volatility than for stock price levels**, suggesting that behavioral signals may be more useful for understanding **market uncertainty and risk** than market direction.
-
-While the results do not establish predictive power, they suggest that behavioral data could be explored as a **supplementary signal for volatility forecasting and market-risk monitoring** alongside traditional financial indicators.
-
-![Project Summary](images/project_summary.png)
-
-## 🎯 Project Overview
-
-Financial markets are influenced not only by economic fundamentals, but also by uncertainty, sentiment, and human behavior.
-
-This project explores whether **alternative behavioral and environmental signals** — including depression-related Google search activity, news coverage, and weather — show measurable relationships with stock market behavior.
-
-Rather than building a stock prediction model, the goal was to investigate whether these signals contain information that could potentially complement traditional financial indicators in areas such as **market monitoring, volatility analysis, and risk assessment**.
-
-I focused on three main questions:
-
-1. Is the depression index associated with stock market volatility?
-2. Does the relationship change when time lags are considered?
-3. Do different industries show different relationships with depression-related signals?
-
-I also explored whether depression-related news and rainfall showed meaningful relationships with market behavior.
+> **Do public depression signals move with the stock market? (Jan 2017 – Jul 2018)**
+> A time-series study of 498 companies across 127 industries, with multiple-comparison control to separate signal from noise.
 
 ---
 
-## 🔍 Key Findings & Business Implications
+## ⚡ TL;DR
 
-### 1. Behavioral signals showed a measurable relationship with market volatility
+- Integrated **600K+ multi-source records** (market prices, Google Trends, news text, weather) into PostgreSQL
+- Tested **17 relationships**; only **3 survived Bonferroni correction** (α = 0.05 / 17 = 0.0029)
+- The strongest and most robust signal: **depression index ↔ market volatility** (r = 0.275, 95% CI [0.196, 0.350], p < 0.001)
+- Price levels, news word counts, and rainfall showed **weak or no reliable association**
+- Built an interactive Flask dashboard for exploring results
 
-Depression-related search interest showed a modest positive relationship with market volatility.
-
-| Market Measure | Correlation (r) | Explained Variance |
-|---|---:|---:|
-| Price Range (Volatility) | **0.2745** | **7.5%** |
-| S&P 500 Volatility | **0.2668** | **7.1%** |
-| S&P 500 Close | **0.1436** | **2.1%** |
-
-The strongest relationships appeared in **volatility measures rather than market price levels**.
-
-After applying Bonferroni correction for multiple testing, all three relationships remained statistically significant.
-
-However, the effect sizes were relatively small. Even the strongest relationship explained less than 8% of observed variation.
-
-**Business implication:** Behavioral data such as search activity may provide a **supplementary signal for market-risk and volatility monitoring**, particularly when combined with traditional financial indicators rather than used independently.
+![Correlation ranking](images/analysis/CORRELATION_IMPORTANCE_RANKING.png)
 
 ---
 
-### 2. Timing may contain useful information
+## 🧠 Problem
 
-Lag analysis showed that some of the stronger relationships appeared around a **1–3 day lag**.
+Traditional financial models rely heavily on price-based indicators. Behavioral finance suggests that **collective emotion and sentiment** may also relate to market dynamics.
 
-This suggests that behavioral signals and financial market activity may not move simultaneously.
+This project asks:
 
-However, correlation at a lag does **not** establish forecasting ability.
-
-**Business implication:** The observed timing patterns provide a reason to test behavioral indicators as additional features in more formal **volatility forecasting or early-warning models**.
-
----
-
-### 3. The relationship varies across industries
-
-The relationship between the depression index and market behavior was not consistent across industries.
-
-Examples of **positive relationships** included:
-
-- Leisure Products
-- Publishing
-- Restaurants
-
-Examples of **negative relationships** included:
-
-- Copper
-- Cargo Ground Transportation
-- Homebuilding
-
-These results are exploratory and require additional statistical testing before concluding that particular industries are systematically more sensitive to behavioral signals.
-
-**Business implication:** Alternative behavioral signals may be more informative when analyzed at the **industry or segment level** rather than across the entire market, potentially supporting more targeted sector monitoring and risk analysis.
-
----
-
-### 4. More data does not necessarily mean a better signal
-
-Depression-related news and rainfall showed much weaker or less consistent relationships with market behavior.
-
-This may partly reflect how the variables were constructed.
-
-For example, weather is highly regional, but rainfall was aggregated into a national average. This may remove meaningful geographic variation.
-
-Similarly, the news variable relied on broad depression-related word counts rather than detailed contextual or sentiment analysis.
-
-**Business implication:** The usefulness of alternative data depends heavily on **how the signal is defined, aggregated, and aligned with the business problem**.
-
-A weak result does not necessarily mean the underlying data source has no value — it may indicate that a more targeted feature design is needed.
-
----
-
-## 💡 Overall Takeaway
-
-This project provides preliminary evidence that **behavioral signals such as depression-related search activity may contain information related to market volatility**.
-
-The results are not strong enough to support a standalone trading or prediction strategy. Instead, they point toward a more practical analytical question:
-
-> **Can alternative behavioral signals add measurable predictive value beyond traditional financial indicators?**
-
-Testing that question would require combining these signals with traditional market, economic, and regional variables in a formal forecasting framework.
-
-The broader lesson from the project is that finding statistical significance is only the beginning.
-
-The more useful question is:
-
-> **Where, when, and under what conditions does a relationship actually matter?**
+> **Does a public depression signal relate to market volatility, trading activity, or prices?**
+> **Which of these relationships hold up after correcting for multiple testing?**
 
 ---
 
 ## 📦 Data
 
-The project combines four different data sources:
+| Source | Variable | Notes |
+|---|---|---|
+| Google Trends | Depression Index (0–100) | Search interest for depression-related terms |
+| CC-News | Depression word count | Headlines and first lines only (see Limitations) |
+| Market data | OHLC prices, volume, S&P 500 | 498 companies, 127 industries, 11 sectors |
+| Weather | Average national rainfall | Not aligned to trading locations |
 
-| Data Source | Signal |
-|---|---|
-| **Google Trends** | Search interest related to "depression" |
-| **CC News** | Depression-related news content |
-| **Yahoo Finance / S&P 500** | Historical stock market data |
-| **Weather Data** | Rainfall measurements across the United States |
-
-### Dataset at a Glance
-
-- **2017-01-01 to 2018-07-05**
-- **551 daily observations**
-- **274K+ individual stock-day records**
-- **100+ industries**
-
-One of the main challenges was that these datasets were collected at different temporal and geographic levels.
-
-Aligning them became an important part of the analysis.
+**Final dataset:** 551 trading days (2017-01-01 to 2018-07-05), 17+ engineered time-series features (lags, rolling volatility, returns).
 
 ---
 
-## 🔧 Data Preparation
+## 🧪 Methodology
 
-The datasets were aligned by date and combined into a daily time-series dataset.
-
-Key preprocessing steps included:
-
-- Aggregating individual stock records into daily market measures
-- Converting weekly Google Trends observations to daily observations using forward filling
-- Calculating stock price range as a volatility proxy
-- Using 7-day S&P 500 volatility
-- Aggregating state-level rainfall into a national average
-- Grouping companies by industry for industry-level comparisons
-
-This process also revealed an important analytical limitation:
-
-> **Aggregation can simplify analysis while simultaneously removing meaningful variation.**
-
-This became particularly important when interpreting the weather and industry results.
+1. **Pipeline:** multi-source ingestion → cleaning and date alignment → feature engineering → PostgreSQL storage
+2. **Features:** daily returns, price range (high − low) as a volatility proxy, 7-day rolling S&P 500 volatility, lagged signals (t+1 to t+3)
+3. **Testing:** Pearson correlations with 95% confidence intervals (Fisher z-transformation)
+4. **Multiple-comparison control:** Bonferroni correction across all 17 tested relationships
+5. **Robustness:** compared the depression index against alternative signals (news word count, rainfall)
 
 ---
 
-## 🔬 Statistical Analysis
+## 📈 Results
 
-I used **Pearson correlation analysis** to examine relationships between the depression index and market variables.
+![Executive summary dashboard](images/analysis/EXECUTIVE_SUMMARY_DASHBOARD.png)
 
-The strongest relationships were:
+| Relationship | r | p-value | Bonferroni |
+|---|---|---|---|
+| Price Range (Volatility) ↔ Depression Index | 0.275 | 5.5e-11 | ✅ Pass |
+| S&P 500 Volatility ↔ Depression Index | 0.267 | 2.0e-10 | ✅ Pass |
+| S&P 500 Close ↔ Depression Index | 0.144 | 7.3e-04 | ✅ Pass * |
+| Individual stock prices and volume ↔ Depression Index | 0.105 – 0.121 | 0.005 – 0.014 | ❌ Fail |
+| Word count and rainfall relationships | −0.072 – 0.077 | > 0.05 | ❌ Not significant |
 
-| Market Measure | Correlation (r) | Statistical Result |
-|---|---:|---|
-| Price Range (Volatility) | **0.2745** | p < 0.001 |
-| S&P 500 Volatility | **0.2668** | p < 0.001 |
-| S&P 500 Close | **0.1436** | p < 0.001 |
+\* The S&P 500 Close relationship involves two trending series, so part of this correlation may reflect shared trends rather than a direct association (see Limitations).
 
-The strongest associations appeared in volatility-related measures rather than price level.
+**Key insight:** the depression signal relates to **uncertainty (volatility)** more than to **direction (price level or returns)**. S&P 500 returns showed no significant relationship with the depression index.
 
-### Effect Size
+### Lag analysis
+Lag windows from t+1 to t+3 were evaluated; the strongest relationships appeared at a 1–3 day lag, suggesting the signal may precede volatility changes. This is an exploratory observation, not a causal test.
 
-Statistical significance does not necessarily imply practical importance.
+### Industry-level patterns
+Industry-level correlations with the depression index were small (|r| < 0.15). Consumer-facing industries (leisure products, publishing, restaurants) tended toward positive correlations and capital-intensive industries (copper, cargo transportation, homebuilding) toward negative ones. **These differences have not yet been formally tested** and should be read as descriptive.
 
-The corresponding explained variance was:
-
-- Price Range ↔ Depression Index: **R² ≈ 7.5%**
-- S&P 500 Volatility ↔ Depression Index: **R² ≈ 7.1%**
-- S&P 500 Close ↔ Depression Index: **R² ≈ 2.1%**
-
-Therefore, even the strongest observed relationship explains only a limited portion of market behavior.
-
----
-
-## 🧪 Multiple Testing: Bonferroni Correction
-
-Because multiple relationships were tested, I also considered the possibility of obtaining statistically significant results simply by chance.
-
-A total of **17 correlations** were tested.
-
-Using:
-
-```text
-α = 0.05
-```
-
-the Bonferroni-adjusted threshold becomes:
-
-```text
-0.05 / 17 = 0.00294
-```
-
-After applying this stricter threshold, three relationships remained statistically significant:
-
-- Price Range (Volatility) ↔ Depression Index
-- S&P 500 Volatility ↔ Depression Index
-- S&P 500 Close ↔ Depression Index
-
-This helped distinguish relationships that remained statistically significant under multiple testing from weaker results.
-
-At the same time:
-
-> **Statistical significance does not mean the relationship is strong, causal, or useful for prediction.**
-
----
-
-## ⏱️ Lag Analysis
-
-I also explored whether the relationship changed when depression-related signals and market variables were shifted across time.
-
-Some stronger relationships appeared around a **1–3 day lag**.
-
-This suggests that timing may matter when comparing behavioral signals with financial market activity.
-
-However, I do **not** interpret this result as evidence that depression-related signals predict future stock volatility.
-
-More formal time-series methods would be required to determine whether the lag contains meaningful predictive information rather than simply reflecting correlation across time.
-
----
-
-## 🏭 Industry-Level Analysis
-
-The relationship was not consistent across industries.
-
-Some industries showed positive correlations with the depression-related signal, including:
-
-- **Leisure Products**
-- **Publishing**
-- **Restaurants**
-
-Other industries showed negative relationships, including:
-
-- **Copper**
-- **Cargo Ground Transportation**
-- **Homebuilding**
-
-These differences suggest that market-wide aggregation may hide meaningful industry-level patterns.
-
-However, these findings remain exploratory.
-
-Additional statistical testing would be required before concluding that particular categories of industries are systematically more sensitive to behavioral signals.
-
----
-
-## 📰 News Analysis
-
-The CC News data did not show a strong or consistent relationship with stock market behavior or the other variables.
-
-This may partly be a **data-design issue**.
-
-The dataset covered a broad range of sources, while the analysis relied on depression-related word counts rather than detailed interpretation of the content of each article.
-
-Therefore, the result does not necessarily mean that news sentiment has no relationship with market behavior.
-
-Instead, the variable constructed from the dataset may have been too broad or noisy to capture that relationship effectively.
-
-> **More data does not necessarily create a better signal. How a variable is defined matters.**
-
----
-
-## 🌧️ Weather Analysis
-
-Rainfall showed very small correlations with the other variables.
-
-For example:
-
-```text
-Rainfall ↔ Stock Close: r ≈ -0.029
-```
-
-Rainfall relationships were generally below:
-
-```text
-|r| = 0.04
-```
-
-A major limitation is geographic aggregation.
-
-Weather is highly regional, but rainfall measurements were averaged across the United States. A national average may remove meaningful local variation.
-
-Therefore, I would not interpret this result as evidence that weather has no relationship with behavior or financial activity.
-
-A more focused analysis could instead examine:
-
-```text
-Regional Weather
-        +
-Regional Search Behavior
-        +
-Socioeconomic Conditions
-        +
-Relevant Economic / Market Activity
-        ↓
-More Focused Market Analysis
-```
+### Alternative signals
+- **News word count:** no meaningful relationship with the depression index (r = 0.006, 95% CI [−0.078, 0.089]) or with market variables
+- **Rainfall:** no significant relationship with stock prices (r = −0.029, p = 0.50)
 
 ---
 
 ## ⚠️ Limitations
 
-Several limitations are important when interpreting the results:
-
-- **Correlation is not causation.** The analysis identifies statistical associations but does not establish causal relationships.
-- **Effect sizes are small.** Even the strongest relationships explain less than 8% of observed variance.
-- **Geographic aggregation is broad.** National-level signals may hide important regional differences.
-- **The analysis period is limited.** The primary dataset covers 2017–2018.
-- **Daily observations are temporally dependent.** Correlation analysis alone cannot fully characterize time-series relationships.
-- **Industry findings are exploratory.** Additional testing is required before generalizing industry-level differences.
-- **Lag correlation does not establish predictive ability.** Formal forecasting models and out-of-sample testing would be required.
-
----
-
-## 📊 Interactive Analytics Dashboard
-
-I built a **Flask + Plotly interactive dashboard** to explore the results visually.
-
-The dashboard includes:
-
-- Time-series visualization
-- Industry comparisons
-- Lag analysis
-- Statistical summaries
-
----
-
-## 🛠️ Tech Stack
-
-- **Python**
-- **pandas**
-- **NumPy**
-- **SciPy**
-- **Flask**
-- **Plotly**
-- **PostgreSQL**
-
----
-
-## 📁 Project Structure
-
-```text
-.
-├── src/
-├── flask/
-├── data/
-├── images/
-│   └── project_summary.png
-├── config/
-├── docs/
-└── README.md
-```
+- **Trending series:** correlations between price levels and a slowly moving index can be inflated by shared trends. Volatility measures are less affected, which is one reason they are the more credible result.
+- **Autocorrelation:** consecutive trading days are not independent, so the effective sample size is smaller than 551 and p-values are likely optimistic.
+- **News text:** only headlines and first lines were processed due to computational constraints.
+- **Weather alignment:** national average rainfall does not match where trading decisions are made.
+- **Associative, not causal:** results describe co-movement, not cause and effect.
 
 ---
 
 ## 🔮 Future Work
 
-The next step would be to **narrow and deepen the analysis rather than simply add more variables**.
-
-Potential extensions include:
-
-- State- or region-level behavioral signals
-- Localized weather data
-- Socioeconomic variables
-- More focused industry or company groups
-- Different economic environments
-- Formal time-series regression
-- Out-of-sample forecasting
-- Testing whether behavioral signals improve forecasts beyond traditional market indicators
-- Statistical testing of industry differences
-- Multiple-testing corrections for expanded analyses
-
-A particularly useful next step would be to compare:
-
-```text
-Traditional Market Indicators
-            ↓
-      Baseline Model
-
-Traditional Indicators
-          +
-Behavioral Signals
-          ↓
-     Extended Model
-
-            ↓
-Does the behavioral data improve
-out-of-sample volatility forecasts?
-```
-
-This would move the project from identifying **statistical associations** toward measuring whether alternative behavioral data provides **incremental predictive value**.
+- **Formally test industry differences** (regression with industry interaction terms, with multiple-comparison control)
+- Use **autocorrelation-robust inference** (e.g., Newey–West standard errors) or differenced series
+- Apply **Granger causality** tests to examine lead–lag direction
+- Extend to volatility forecasting (e.g., GARCH, XGBoost)
+- Pair region-specific trading data with localized weather
 
 ---
 
-## 📌 What I Learned
+## 📊 Interactive Dashboard
 
-The most useful lesson from this project was that finding a statistically significant relationship is only the beginning of the analysis.
+A Flask dashboard supports exploration of time series, industry comparisons, lag effects, and statistical summaries.
 
-The depression index showed a measurable relationship with volatility, while news and rainfall did not behave as originally expected.
 
-Understanding those differences required looking beyond correlation and considering how each variable was **defined, aggregated, and aligned**.
+The cloud version of this pipeline (EventBridge → Lambda → S3 → EC2 → RDS PostgreSQL, with a Streamlit front end) is documented in the companion repository: [Cloud-Based Data Pipeline & Analytics Platform (AWS)](https://github.com/boa74/Cloud-Based-Data-Pipeline-Analytics-Platform-AWS-)
 
-It also changed how I think about statistical significance.
+---
 
-A small p-value can provide evidence that a relationship is unlikely to be explained by random variation under the test assumptions, but it does not tell us whether that relationship is **large, causal, predictive, or useful in practice**.
+## 🛠️ Tech Stack
 
-For me, the more important analytical question became:
+Python (pandas, NumPy, SciPy) · PostgreSQL · Flask · Plotly
 
-> **Where, when, and under what conditions does this relationship actually matter?**
+---
+
+## 📁 Project Structure
+
+```
+.
+├── src/              # data processing and analysis
+├── flask/            # dashboard
+├── config/
+├── docs/
+├── images/analysis/  # figures used in this README
+└── README.md
+```
 
 ---
 
 ## 📬 Contact
 
-**Boa Kim**  
-M.S. Applied Analytics, Columbia University
-
-**GitHub:** [github.com/boa74](https://github.com/boa74)  
-**LinkedIn:** [linkedin.com/in/boah-kim](https://linkedin.com/in/boah-kim)
+**Boa Kim** · M.S. Applied Analytics, Columbia University
+GitHub: https://github.com/boa74 · LinkedIn: https://linkedin.com/in/boah-kim
