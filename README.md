@@ -53,7 +53,7 @@ This project asks:
 
 ## 📈 Results
 
-![Executive summary dashboard](images/analysis/EXECUTIVE_SUMMARY_DASHBOARD.png)
+![Executive summary dashboard](images/project_summary.png)
 
 | Relationship | r | p-value | Bonferroni |
 |---|---|---|---|
