@@ -12,8 +12,8 @@
 - The strongest and most robust signal: **depression index ↔ market volatility** (r = 0.275, 95% CI [0.196, 0.350], p < 0.001)
 - Price levels, news word counts, and rainfall showed **weak or no reliable association**
 - Built an interactive Flask dashboard for exploring results
+![Executive summary dashboard](images/project_summary.png)
 
-![Correlation ranking](images/analysis/CORRELATION_IMPORTANCE_RANKING.png)
 
 ---
 
@@ -53,7 +53,7 @@ This project asks:
 
 ## 📈 Results
 
-![Executive summary dashboard](images/project_summary.png)
+images/analysis/CORRELATION_IMPORTANCE_RANKING.png
 
 | Relationship | r | p-value | Bonferroni |
 |---|---|---|---|
