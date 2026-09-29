@@ -53,7 +53,7 @@ This project asks:
 
 ## 📈 Results
 
-images/analysis/CORRELATION_IMPORTANCE_RANKING.png
+![CorrelationDashboard](images/analysis/CORRELATION_IMPORTANCE_RANKING.png)
 
 | Relationship | r | p-value | Bonferroni |
 |---|---|---|---|
