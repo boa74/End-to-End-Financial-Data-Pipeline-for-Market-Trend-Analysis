@@ -1,57 +1,57 @@
-# 📊 Behavioral Signals & Market Volatility
+# 📊 End-to-End Financial Data Pipeline & Market Trend Analytics
 
-> **Do public depression signals move with the stock market? (Jan 2017 – Jul 2018)**
-> A time-series study of 498 companies across 127 industries, with multiple-comparison control to separate signal from noise.
+> **An end-to-end analytics project integrating 600K+ financial and behavioral records to identify statistically robust relationships with market volatility.**
+
+**Python · SQL · PostgreSQL · Flask · Plotly**
 
 ---
 
-## ⚡ TL;DR
+## 🎯 Project at a Glance
 
-- Integrated **600K+ multi-source records** (market prices, Google Trends, news text, weather) into PostgreSQL
-- Tested **17 relationships**; only **3 survived Bonferroni correction** (α = 0.05 / 17 = 0.0029)
-- The strongest and most robust signal: **depression index ↔ market volatility** (r = 0.275, 95% CI [0.196, 0.350], p < 0.001)
-- Price levels, news word counts, and rainfall showed **weak or no reliable association**
-- Built an interactive Flask dashboard for exploring results
+| 📦 Data Scale | 🏢 Market Coverage | 🧪 Statistical Tests | ✅ Robust Findings |
+|:---:|:---:|:---:|:---:|
+| **600K+ records** | **498 companies** | **17 relationships** | **3 significant** |
+| 4 external data sources | 127 industries | Bonferroni controlled | after correction |
+
+| 🗄️ Data Platform | 📊 Visualization | ⚙️ Analytics Workflow | 📈 Strongest Signal |
+|:---:|:---:|:---:|:---:|
+| **PostgreSQL** | **Flask + Plotly** | **Python + SQL** | **r = 0.275** |
+| Integrated data store | Interactive dashboard | End-to-end pipeline | Depression Index ↔ Volatility |
+
 ![Executive summary dashboard](images/project_summary.png)
 
+---
+
+## 💡 Key Finding
+
+The strongest and most robust relationship was between the
+**Depression Index and market volatility**:
+
+### **r = 0.275 · 95% CI [0.196, 0.350] · p < 0.001**
+
+The behavioral signal was more strongly associated with **market uncertainty
+(volatility)** than with **market direction (price levels or returns)**.
+
+> **Statistical rigor:** 17 relationships were tested using a Bonferroni-adjusted
+> significance threshold of α = 0.0029. Only 3 remained significant after correction.
 
 ---
 
-## 🧠 Problem
+## 🏗️ What I Built
 
-Traditional financial models rely heavily on price-based indicators. Behavioral finance suggests that **collective emotion and sentiment** may also relate to market dynamics.
+**4 External Data Sources**  
+↓  
+**Python Data Processing & Cleaning**  
+↓  
+**PostgreSQL Data Store**  
+↓  
+**Feature Engineering**  
+↓  
+**Statistical Testing & Validation**  
+↓  
+**Flask + Plotly Interactive Dashboard**
 
-This project asks:
-
-> **Does a public depression signal relate to market volatility, trading activity, or prices?**
-> **Which of these relationships hold up after correcting for multiple testing?**
-
----
-
-## 📦 Data
-
-| Source | Variable | Notes |
-|---|---|---|
-| Google Trends | Depression Index (0–100) | Search interest for depression-related terms |
-| CC-News | Depression word count | Headlines and first lines only (see Limitations) |
-| Market data | OHLC prices, volume, S&P 500 | 498 companies, 127 industries, 11 sectors |
-| Weather | Average national rainfall | Not aligned to trading locations |
-
-**Final dataset:** 551 trading days (2017-01-01 to 2018-07-05), 17+ engineered time-series features (lags, rolling volatility, returns).
-
----
-
-## 🧪 Methodology
-
-1. **Pipeline:** multi-source ingestion → cleaning and date alignment → feature engineering → PostgreSQL storage
-2. **Features:** daily returns, price range (high − low) as a volatility proxy, 7-day rolling S&P 500 volatility, lagged signals (t+1 to t+3)
-3. **Testing:** Pearson correlations with 95% confidence intervals (Fisher z-transformation)
-4. **Multiple-comparison control:** Bonferroni correction across all 17 tested relationships
-5. **Robustness:** compared the depression index against alternative signals (news word count, rainfall)
-
----
-
-## 📈 Results
+## 📈 Key Results
 
 ![CorrelationDashboard](images/analysis/CORRELATION_IMPORTANCE_RANKING.png)
 
